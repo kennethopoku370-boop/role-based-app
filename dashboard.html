@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <header>
+      <h1 id="welcomeHeader">Welcome</h1>
+      <button onclick="logout()">Logout</button>
+    </header>
+
+    <main id="contentArea">
+      <!-- Admin Controls -->
+      <section id="adminSection" class="role-section" style="display:none;">
+        <h2>Admin Dashboard</h2>
+        <p>You have full access. You can add and view Coordinators and Students.</p>
+
+        <div class="card">
+          <h3>Add New User (Admin Feature)</h3>
+          <form id="adminAddUserForm">
+            <input type="text" id="adminUserName" placeholder="Full Name" required>
+            <input type="email" id="adminUserEmail" placeholder="Email" required>
+            <input type="password" id="adminUserPass" placeholder="Password" required>
+            <select id="adminUserRole" required>
+              <option value="coordinator">Coordinator</option>
+              <option value="student">Student</option>
+            </select>
+            <button type="submit">Create User</button>
+          </form>
+        </div>
+
+        <div class="card">
+          <h3>All Users List</h3>
+          <ul id="allUsersList"></ul>
+        </div>
+      </section>
+
+      <!-- Coordinator Controls -->
+      <section id="coordinatorSection" class="role-section" style="display:none;">
+        <h2>Coordinator Dashboard</h2>
+        <p>You can add and view Students only (No access to Admin features or Admin records).</p>
+
+        <div class="card">
+          <h3>Add New Student (Coordinator Feature)</h3>
+          <form id="coordAddStudentForm">
+            <input type="text" id="coordStudentName" placeholder="Student Name" required>
+            <input type="email" id="coordStudentEmail" placeholder="Email" required>
+            <input type="password" id="coordStudentPass" placeholder="Password" required>
+            <button type="submit">Create Student</button>
+          </form>
+        </div>
+
+        <div class="card">
+          <h3>Students List</h3>
+          <ul id="studentsList"></ul>
+        </div>
+      </section>
+
+      <!-- Student View -->
+      <section id="studentSection" class="role-section" style="display:none;">
+        <h2>Student Dashboard</h2>
+        <p>Welcome to your personal dashboard! You have standard student view privileges.</p>
+        <div class="card">
+          <h3>My Profile Info</h3>
+          <p id="studentProfileInfo"></p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
