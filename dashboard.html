@@ -1,77 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendly Dashboard</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-<body>
-  <div class="dashboard-container">
-    <header>
-      <h1 id="welcomeHeader">Welcome</h1>
-      <button onclick="logout()">Logout</button>
+<body class="dashboard-body">
+
+    <!-- Top Navigation Bar -->
+    <header class="navbar">
+        <div class="nav-brand">
+            <span class="check-icon">✓</span> <strong>Attendly Dashboard</strong> 📚
+        </div>
+        <nav class="nav-links">
+            <a href="dashboard.html" class="nav-item">Home</a>
+            <button id="logoutBtn" class="logout-link-btn">Logout</button>
+        </nav>
     </header>
 
-    <main id="contentArea">
-      <!-- Admin Controls -->
-      <section id="adminSection" class="role-section" style="display:none;">
-        <h2>Admin Dashboard</h2>
-        <p>You have full access. You can add and view Coordinators and Students.</p>
+    <main class="dashboard-container">
+        <!-- Dashboard Card Outer Wrapper -->
+        <div class="main-card">
+            
+            <div class="card-header">
+                <h1 id="welcomeTitle">Dashboard - All Registered Students Loop 📚</h1>
+            </div>
 
-        <div class="card">
-          <h3>Add New User (Admin Feature)</h3>
-          <form id="adminAddUserForm">
-            <input type="text" id="adminUserName" placeholder="Full Name" required>
-            <input type="email" id="adminUserEmail" placeholder="Email" required>
-            <input type="password" id="adminUserPass" placeholder="Password" required>
-            <select id="adminUserRole" required>
-              <option value="coordinator">Coordinator</option>
-              <option value="student">Student</option>
-            </select>
-            <button type="submit">Create User</button>
-          </form>
+            <!-- Stats Grid (Counters) -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h2 id="totalCount" class="stat-number">0</h2>
+                    <p class="stat-label">Total</p>
+                </div>
+                <div class="stat-card">
+                    <h2 id="presentCount" class="stat-number green-text">0</h2>
+                    <p class="stat-label">Present</p>
+                </div>
+                <div class="stat-card">
+                    <h2 id="absentCount" class="stat-number red-text">0</h2>
+                    <p class="stat-label">Absent</p>
+                </div>
+                <div class="stat-card">
+                    <h2 id="notMarkedCount" class="stat-number orange-text">0</h2>
+                    <p class="stat-label">Not Marked</p>
+                </div>
+            </div>
+
+            <!-- Role-based Controls & Table -->
+            <div id="managementSection">
+                <!-- Attendance Table -->
+                <div class="table-responsive">
+                    <table class="attendly-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Dept</th>
+                                <th>Status</th>
+                                <th>Date & Time</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="studentTableBody">
+                            <!-- Table rows dynamically populated by script.js -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Action Buttons Footer (Admin / Coordinator) -->
+                <div id="adminControls" class="action-footer">
+                    <button id="clearAllBtn" class="btn btn-danger">Clear All</button>
+                    <button id="openModalBtn" class="btn btn-primary">+ Register New Student</button>
+                </div>
+            </div>
+
         </div>
-
-        <div class="card">
-          <h3>All Users List</h3>
-          <ul id="allUsersList"></ul>
-        </div>
-      </section>
-
-      <!-- Coordinator Controls -->
-      <section id="coordinatorSection" class="role-section" style="display:none;">
-        <h2>Coordinator Dashboard</h2>
-        <p>You can add and view Students only (No access to Admin features or Admin records).</p>
-
-        <div class="card">
-          <h3>Add New Student (Coordinator Feature)</h3>
-          <form id="coordAddStudentForm">
-            <input type="text" id="coordStudentName" placeholder="Student Name" required>
-            <input type="email" id="coordStudentEmail" placeholder="Email" required>
-            <input type="password" id="coordStudentPass" placeholder="Password" required>
-            <button type="submit">Create Student</button>
-          </form>
-        </div>
-
-        <div class="card">
-          <h3>Students List</h3>
-          <ul id="studentsList"></ul>
-        </div>
-      </section>
-
-      <!-- Student View -->
-      <section id="studentSection" class="role-section" style="display:none;">
-        <h2>Student Dashboard</h2>
-        <p>Welcome to your personal dashboard! You have standard student view privileges.</p>
-        <div class="card">
-          <h3>My Profile Info</h3>
-          <p id="studentProfileInfo"></p>
-        </div>
-      </section>
     </main>
-  </div>
 
-  <script src="script.js"></script>
+    <!-- Register New Student Modal -->
+    <div id="studentModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="closeModalBtn">&times;</span>
+            <h2>Register New Student</h2>
+            <form id="addStudentForm">
+                <div class="form-group">
+                    <label for="studentId">Student Index/ID</label>
+                    <input type="text" id="studentId" required placeholder="e.g. 01255249D">
+                </div>
+                <div class="form-group">
+                    <label for="studentName">Full Name</label>
+                    <input type="text" id="studentName" required placeholder="e.g. Samuel Otoo">
+                </div>
+                <div class="form-group">
+                    <label for="studentDept">Department</label>
+                    <input type="text" id="studentDept" required placeholder="e.g. Computer Science">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Add Student</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
